@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jhanina Torres" />
+
+
+<title>TAREA1 INTRODUCCIÓN A R</title>
+
+<script src="TAREA1-INTRODUCCION-R_files/header-attrs-2.11/header-attrs.js"></script>
+<script src="TAREA1-INTRODUCCION-R_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="TAREA1-INTRODUCCION-R_files/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="TAREA1-INTRODUCCION-R_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="TAREA1-INTRODUCCION-R_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="TAREA1-INTRODUCCION-R_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="TAREA1-INTRODUCCION-R_files/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="TAREA1-INTRODUCCION-R_files/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="TAREA1-INTRODUCCION-R_files/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="TAREA1-INTRODUCCION-R_files/navigation-1.1/tabsets.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">TAREA1 INTRODUCCIÓN A R</h1>
+<h4 class="author">Jhanina Torres</h4>
+<h4 class="date">26-02-2022</h4>
+
+</div>
+
+
+<div id="section" class="section level2">
+<h2>1</h2>
+</div>
+<div
+id="crear-un-identificador-de-nombre-ciudad-y-asigne-como-valor-el-nombre-de-alguna-ciudad."
+class="section level1">
+<h1>Crear un identificador de nombre “ciudad” y asigne como valor el
+nombre de alguna ciudad.</h1>
+<p>ciudad &lt;- “Ibarra”</p>
+<div id="section-1" class="section level2">
+<h2>2</h2>
+</div>
+</div>
+<div
+id="crear-un-identificador-de-nombre-pais_andes-y-asigne-como-valor-los-nombres-de-los-países-por-donde-cruza-la-cordillera-de-los-andes."
+class="section level1">
+<h1>Crear un identificador de nombre “pais_andes” y asigne como valor
+los nombres de los países por donde # cruza la cordillera de Los
+Andes.</h1>
+<p>pais_andes&lt;-c(“Venezuela”,“Ecuador”,“Peru”,“Bolivia”,“Argentina”)</p>
+</div>
+<div
+id="crear-un-dataframe-con-12-eventos-files-y-5-variables-columnas-cada-columna-debe-tener-diferentes-tipos-de-datos-entero-decimal-caracter-logico."
+class="section level1">
+<h1>Crear un dataframe con 12 eventos (files) y 5 variables (columnas),
+cada columna debe tener diferentes # tipos de datos (entero, decimal,
+caracter, logico).</h1>
+<p>poblacion &lt;- data.frame(identador = seq(1:12), hombres_mujeres =
+as.factor(c(rep(0, 10), 1, 1)), nombres = c(“Mateo”, “Leandro”, “Ivan”,
+“Ciro”, “Marlon”, “Alex”, “Sandro”, “Carlos”, “Santiago”, “Adrian”,
+“Nicole”,“Domenica”), estatura = c(1.50, 1.45, 1.70, 1.98, 1.69, 1.90,
+1.70, 1.70, 1.65, 1.80, 1.68, 1.59))</p>
+<div id="section-2" class="section level2">
+<h2>3</h2>
+</div>
+</div>
+<div
+id="cargue-el-dataset-dnase-e-identifique-su-estructura.-extraiga-subsetlos-datos-que-cumplan-con-las-condiciones-de"
+class="section level1">
+<h1>Cargue el dataset “DNase” e identifique su estructura. Extraiga
+(subset),los datos que cumplan con las condiciones de:</h1>
+</div>
+<div id="conc-concentracion-entre-0.1-y-0.2" class="section level1">
+<h1>1. “conc” (concentracion) entre 0.1 y 0.2</h1>
+</div>
+<div
+id="run-diferente-a-2-conc-mayor-a-0.2-y-density-menor-o-igual-a-1.0"
+class="section level1">
+<h1>2. “Run” diferente a 2, “conc” mayor a 0.2 y “density” menor o igual
+a 1.0</h1>
+<p>data(DNase) database &lt;- DNase first_filter &lt;- filter(DNase,
+conc &lt; 0.2 &amp; conc &gt; 0.1) second_filter &lt;-filter(DNase, Run
+!=2 &amp; conc &gt; 0.2 &amp; density &lt;= 1) library(dplyr) conc &lt;-
+filter(database , conc &lt; 0.2 &amp; conc &gt; 0.1)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(DNase)</span></code></pre></div>
+<pre><code>##     Run        conc density
+## 1     1  0.04882812   0.017
+## 2     1  0.04882812   0.018
+## 3     1  0.19531250   0.121
+## 4     1  0.19531250   0.124
+## 5     1  0.39062500   0.206
+## 6     1  0.39062500   0.215
+## 7     1  0.78125000   0.377
+## 8     1  0.78125000   0.374
+## 9     1  1.56250000   0.614
+## 10    1  1.56250000   0.609
+## 11    1  3.12500000   1.019
+## 12    1  3.12500000   1.001
+## 13    1  6.25000000   1.334
+## 14    1  6.25000000   1.364
+## 15    1 12.50000000   1.730
+## 16    1 12.50000000   1.710
+## 17    2  0.04882812   0.045
+## 18    2  0.04882812   0.050
+## 19    2  0.19531250   0.137
+## 20    2  0.19531250   0.123
+## 21    2  0.39062500   0.225
+## 22    2  0.39062500   0.207
+## 23    2  0.78125000   0.401
+## 24    2  0.78125000   0.383
+## 25    2  1.56250000   0.672
+## 26    2  1.56250000   0.681
+## 27    2  3.12500000   1.116
+## 28    2  3.12500000   1.078
+## 29    2  6.25000000   1.554
+## 30    2  6.25000000   1.526
+## 31    2 12.50000000   1.932
+## 32    2 12.50000000   1.914
+## 33    3  0.04882812   0.070
+## 34    3  0.04882812   0.068
+## 35    3  0.19531250   0.173
+## 36    3  0.19531250   0.165
+## 37    3  0.39062500   0.277
+## 38    3  0.39062500   0.248
+## 39    3  0.78125000   0.434
+## 40    3  0.78125000   0.426
+## 41    3  1.56250000   0.703
+## 42    3  1.56250000   0.689
+## 43    3  3.12500000   1.067
+## 44    3  3.12500000   1.077
+## 45    3  6.25000000   1.629
+## 46    3  6.25000000   1.479
+## 47    3 12.50000000   2.003
+## 48    3 12.50000000   1.884
+## 49    4  0.04882812   0.011
+## 50    4  0.04882812   0.016
+## 51    4  0.19531250   0.118
+## 52    4  0.19531250   0.108
+## 53    4  0.39062500   0.200
+## 54    4  0.39062500   0.206
+## 55    4  0.78125000   0.364
+## 56    4  0.78125000   0.360
+## 57    4  1.56250000   0.620
+## 58    4  1.56250000   0.640
+## 59    4  3.12500000   0.979
+## 60    4  3.12500000   0.973
+## 61    4  6.25000000   1.424
+## 62    4  6.25000000   1.399
+## 63    4 12.50000000   1.740
+## 64    4 12.50000000   1.732
+## 65    5  0.04882812   0.035
+## 66    5  0.04882812   0.035
+## 67    5  0.19531250   0.132
+## 68    5  0.19531250   0.135
+## 69    5  0.39062500   0.224
+## 70    5  0.39062500   0.220
+## 71    5  0.78125000   0.385
+## 72    5  0.78125000   0.390
+## 73    5  1.56250000   0.658
+## 74    5  1.56250000   0.647
+## 75    5  3.12500000   1.060
+## 76    5  3.12500000   1.031
+## 77    5  6.25000000   1.425
+## 78    5  6.25000000   1.409
+## 79    5 12.50000000   1.750
+## 80    5 12.50000000   1.738
+## 81    6  0.04882812   0.086
+## 82    6  0.04882812   0.103
+## 83    6  0.19531250   0.191
+## 84    6  0.19531250   0.189
+## 85    6  0.39062500   0.272
+## 86    6  0.39062500   0.277
+## 87    6  0.78125000   0.440
+## 88    6  0.78125000   0.426
+## 89    6  1.56250000   0.686
+## 90    6  1.56250000   0.676
+## 91    6  3.12500000   1.062
+## 92    6  3.12500000   1.072
+## 93    6  6.25000000   1.424
+## 94    6  6.25000000   1.459
+## 95    6 12.50000000   1.768
+## 96    6 12.50000000   1.806
+## 97    7  0.04882812   0.094
+## 98    7  0.04882812   0.092
+## 99    7  0.19531250   0.182
+## 100   7  0.19531250   0.182
+## 101   7  0.39062500   0.282
+## 102   7  0.39062500   0.273
+## 103   7  0.78125000   0.444
+## 104   7  0.78125000   0.439
+## 105   7  1.56250000   0.686
+## 106   7  1.56250000   0.668
+## 107   7  3.12500000   1.052
+## 108   7  3.12500000   1.035
+## 109   7  6.25000000   1.409
+## 110   7  6.25000000   1.392
+## 111   7 12.50000000   1.759
+## 112   7 12.50000000   1.739
+## 113   8  0.04882812   0.054
+## 114   8  0.04882812   0.054
+## 115   8  0.19531250   0.152
+## 116   8  0.19531250   0.148
+## 117   8  0.39062500   0.226
+## 118   8  0.39062500   0.222
+## 119   8  0.78125000   0.392
+## 120   8  0.78125000   0.383
+## 121   8  1.56250000   0.658
+## 122   8  1.56250000   0.644
+## 123   8  3.12500000   1.043
+## 124   8  3.12500000   1.002
+## 125   8  6.25000000   1.466
+## 126   8  6.25000000   1.381
+## 127   8 12.50000000   1.743
+## 128   8 12.50000000   1.724
+## 129   9  0.04882812   0.032
+## 130   9  0.04882812   0.043
+## 131   9  0.19531250   0.142
+## 132   9  0.19531250   0.155
+## 133   9  0.39062500   0.239
+## 134   9  0.39062500   0.242
+## 135   9  0.78125000   0.420
+## 136   9  0.78125000   0.395
+## 137   9  1.56250000   0.624
+## 138   9  1.56250000   0.705
+## 139   9  3.12500000   1.046
+## 140   9  3.12500000   1.026
+## 141   9  6.25000000   1.398
+## 142   9  6.25000000   1.405
+## 143   9 12.50000000   1.693
+## 144   9 12.50000000   1.729
+## 145  10  0.04882812   0.052
+## 146  10  0.04882812   0.094
+## 147  10  0.19531250   0.164
+## 148  10  0.19531250   0.166
+## 149  10  0.39062500   0.259
+## 150  10  0.39062500   0.256
+## 151  10  0.78125000   0.439
+## 152  10  0.78125000   0.439
+## 153  10  1.56250000   0.690
+## 154  10  1.56250000   0.701
+## 155  10  3.12500000   1.042
+## 156  10  3.12500000   1.075
+## 157  10  6.25000000   1.340
+## 158  10  6.25000000   1.406
+## 159  10 12.50000000   1.699
+## 160  10 12.50000000   1.708
+## 161  11  0.04882812   0.047
+## 162  11  0.04882812   0.057
+## 163  11  0.19531250   0.159
+## 164  11  0.19531250   0.155
+## 165  11  0.39062500   0.246
+## 166  11  0.39062500   0.252
+## 167  11  0.78125000   0.427
+## 168  11  0.78125000   0.411
+## 169  11  1.56250000   0.704
+## 170  11  1.56250000   0.684
+## 171  11  3.12500000   0.994
+## 172  11  3.12500000   0.980
+## 173  11  6.25000000   1.421
+## 174  11  6.25000000   1.385
+## 175  11 12.50000000   1.715
+## 176  11 12.50000000   1.721</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "TAREA1-INTRODUCCION-R_files/mathjax-local/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

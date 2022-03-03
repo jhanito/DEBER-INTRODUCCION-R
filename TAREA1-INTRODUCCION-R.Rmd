@@ -1,0 +1,65 @@
+---
+title: "TAREA1 INTRODUCCIÓN A R"
+author: "Jhanina Torres"
+date: "26-02-2022"
+output:
+  html_document:
+    df_print: default
+    mathjax: local
+    self_contained: false
+    fig_height: 6
+    fig_width: 8
+    theme: journal
+    highlight: zenburn
+    toc: yes
+    toc_depth: 3
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1 
+# Crear un identificador de nombre "ciudad" y asigne como valor el nombre de alguna ciudad.
+
+ciudad <- "Ibarra"
+
+
+## 2
+# Crear un identificador de nombre "pais_andes" y asigne como valor los nombres de los países por donde # cruza la cordillera de Los Andes.
+
+pais_andes<-c("Venezuela","Ecuador","Peru","Bolivia","Argentina")
+
+# Crear un dataframe con 12 eventos (files) y 5 variables (columnas), cada columna debe tener diferentes # tipos de datos (entero, decimal, caracter, logico).
+
+poblacion <- data.frame(identador = seq(1:12),
+                        hombres_mujeres = as.factor(c(rep(0, 10), 1, 1)),
+                        nombres = c("Mateo", "Leandro", "Ivan", "Ciro", "Marlon", "Alex", "Sandro", 
+                                    "Carlos", "Santiago", "Adrian", "Nicole","Domenica"),
+                        estatura = c(1.50, 1.45, 1.70, 1.98, 1.69, 1.90, 1.70, 1.70, 1.65, 1.80, 1.68, 
+                                     1.59))
+                             
+
+
+## 3
+# Cargue el dataset "DNase" e identifique su estructura. Extraiga (subset),los datos que cumplan con las condiciones de: 
+#   1. "conc" (concentracion) entre 0.1 y 0.2
+#   2. "Run" diferente a 2, "conc" mayor a 0.2 y "density" menor o igual a 1.0
+
+
+data(DNase)
+database <- DNase
+first_filter <- filter(DNase, conc < 0.2 & conc > 0.1)
+second_filter <-filter(DNase, Run !=2 & conc > 0.2 & density <= 1)
+library(dplyr)
+conc <- filter(database , conc < 0.2 & conc > 0.1)
+
+ 
+```{r DNase}
+print(DNase)
+```                       
+                        
+
+
